@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="popup.css" />
+  <title>Movie Translator</title>
+</head>
+<body>
+  <header class="head">
+    <div class="logo">🎬</div>
+    <div>
+      <h1>Movie Translator</h1>
+      <p>Subtitles → any language</p>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="row switch-row">
+        <div>
+          <strong>Translate this page</strong>
+          <span class="hint">Turn the site's own subtitles on first, then enable.</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="enabled" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <section>
+      <label class="field">
+        <span>Output language</span>
+        <select id="target"></select>
+      </label>
+
+      <label class="field">
+        <span>Source language (auto = detect)</span>
+        <select id="source"></select>
+      </label>
+
+      <label class="field">
+        <span>Translation engine</span>
+        <select id="provider">
+          <option value="auto">Automatic (Google → Lingva → MyMemory)</option>
+          <option value="google">Google free endpoint</option>
+          <option value="lingva">Lingva (open-source proxy)</option>
+          <option value="mymemory">MyMemory free tier</option>
+        </select>
+      </label>
+    </section>
+
+    <section>
+      <div class="check-grid">
+        <label><input type="checkbox" id="hideOriginal" /> Hide original subtitles</label>
+        <label><input type="checkbox" id="showOriginal" /> Show original too</label>
+      </div>
+
+      <div class="field range-field">
+        <span>Subtitle size: <b id="fontSizeLabel"></b></span>
+        <input type="range" id="fontSize" min="14" max="44" step="1" />
+      </div>
+
+      <div class="field range-field">
+        <span>Background darkness: <b id="bgOpacityLabel"></b></span>
+        <input type="range" id="bgOpacity" min="0" max="90" step="5" />
+      </div>
+    </section>
+
+    <footer>
+      After changing the language, refresh the movie page. No audio mode on iOS —
+      use the site's own subtitles and they'll appear translated.
+    </footer>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>
