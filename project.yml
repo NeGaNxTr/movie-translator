@@ -1,0 +1,66 @@
+name: MovieTranslator
+options:
+  minimumXcodeGenVersion: "2.38.0"
+  deploymentTarget:
+    iOS: "15.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+
+targets:
+  MovieTranslator:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+    dependencies:
+      - target: MovieTranslatorExtension
+        embed: true
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Movie Translator
+        LSApplicationCategoryType: public.app-category.entertainment
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.yourname.movietranslator
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        TARGETED_DEVICE_FAMILY: "1"
+
+  MovieTranslatorExtension:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Extension
+    info:
+      path: Extension/Info.plist
+      properties:
+        CFBundleDisplayName: Movie Translator
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.Safari.web-extension
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).SafariWebExtensionHandler
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.yourname.movietranslator.extension
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""
+        TARGETED_DEVICE_FAMILY: "1"
+        SKIP_INSTALL: YES
+
+schemes:
+  MovieTranslator:
+    build:
+      targets:
+        MovieTranslator: all
+        MovieTranslatorExtension: all
+    run:
+      config: Release
+    archive:
+      config: Release
